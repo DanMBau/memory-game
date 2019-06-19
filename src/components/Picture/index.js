@@ -3,9 +3,9 @@ import "./style.css";
 
 function Picture(props) {
   return (
-    <div className="Container">
+    <div className="card col-md-3">
       <div className="img-container ">
-        <img className="img col-3" alt={props.id} src={props.image} />
+        <img className="img" alt={props.id} src={props.image} />
       </div>
       </div>
   );

@@ -1,14 +1,17 @@
-
+.card{
+  width: 250px
+}
 
 .img-container {
   text-align: center;
   background: grey;
-  width: 90%;
-  align: center
+  
+ 
 }
+
 .img {
-  height: 200px;
-  width: auto
+  width: 200px;
+  height: 200px
 }
 
 
