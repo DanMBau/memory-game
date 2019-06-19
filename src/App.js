@@ -6,14 +6,31 @@ import pics from "./pics.json"
 
 let correctGuesses = 0;
 let bestScore = 0;
-let clickMessage = "Click on a movie poster to gain points! Click on the same one twice and you lose!";
+let clickMessage = "Click on a picture to gain points! Click on the same one twice and you lose!";
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
-    pics
-  };
+    pics,
+    correctGuesses,
+    bestScore,
+    clickMessage
+};
 
+  setClicked = id =>{
+
+    //State Pics array
+    let pics = this.state.pics;
+    let clickedPic = pics.filter(pic => pic.id === id);
+
+
+    //Disp
+    pics.sort(function(a, b){return 0.5 - Math.random()});
+    this.setState({ pics });
+
+
+
+  }
  
 
 
@@ -28,6 +45,7 @@ class App extends Component {
           <div className="row">
         {this.state.pics.map(picture => (
           <Picture 
+            setClicked={this.setClicked}
             id={picture.id}
             key={picture.id}
             image={picture.image}
