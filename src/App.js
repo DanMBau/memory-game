@@ -17,21 +17,26 @@ class App extends Component {
     clickMessage
 };
 
+
+
   setClicked = id =>{
 
-    //State Pics array
+    //state pics array
     let pics = this.state.pics;
     let clickedPic = pics.filter(pic => pic.id === id);
+    
+    
 
+      
+      //update with random array
+      pics.sort(function(a, b){return 0.5 - Math.random()});
+      this.setState({ pics });
+      this.setState({clickMessage});
 
-    //Disp
-    pics.sort(function(a, b){return 0.5 - Math.random()});
-    this.setState({ pics });
+    }
 
-
-
-  }
- 
+  
+    
 
 
 
@@ -55,7 +60,7 @@ class App extends Component {
           </div>
       </>
     );
-  }
+  };
 }
 
 
