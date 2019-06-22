@@ -4,38 +4,49 @@ import Wrapper from "./components/Wrapper";
 import Navbar from "./components/Navbar";
 import pics from "./pics.json"
 
-let correctGuesses = 0;
-let bestScore = 0;
-let clickMessage = "Click on a picture to gain points! Click on the same one twice and you lose!";
+
 
 class App extends Component {
-  // Setting this.state.friends to the friends json array
+
   state = {
     pics,
-    correctGuesses,
-    bestScore,
-    clickMessage
+    correctGuesses: 0,
+    bestScore: 0,
+    heading: "",
+    clicked: false,
 };
 
 
+
+handleIncrement = (id) => {
+  this.setState({ clicked: true });
+  
+  if (this.state.clicked) {
+    this.setState({ correctGuesses: this.state.correctGuesses + 1, heading: "You guessed correctly!" });
+
+    if (this.state.correctGuesses > this.state.bestScore) {
+      this.setState({ bestScore: this.state.correctGuesses });
+    }
+    
+  } else {
+    this.setState({correctGuesses: this.state.correctGuesses , heading: "You guessed incorrectly!" });
+    /* console.log(this.state.idsClicked); */
+  }
+  
+};
 
   setClicked = id =>{
 
     //state pics array
     let pics = this.state.pics;
-    let clickedPic = pics.filter(pic => pic.id === id);
-    
-    
-
-      
       //update with random array
+      
+      this.handleIncrement()
       pics.sort(function(a, b){return 0.5 - Math.random()});
-      this.setState({ pics });
-      this.setState({clickMessage});
-
+      // this.setState({ pics });
+      
     }
 
-  
     
 
 
@@ -45,7 +56,10 @@ class App extends Component {
   render() {
     return (
       <>
-        <Navbar />
+        <Navbar
+        correctGuesses={this.state.correctGuesses}
+        bestScore={this.state.bestScore}
+        heading={this.state.heading || "Click an image to begin!"}/>
         <div className="container">
           <div className="row">
         {this.state.pics.map(picture => (
@@ -54,6 +68,9 @@ class App extends Component {
             id={picture.id}
             key={picture.id}
             image={picture.image}
+            correctGuesses={this.state.correctGuesses}
+            handleIncrement={this.handleIncrement}
+						handleHighestScore={this.handleHighestScore}
           />
           ))}
           </div>
