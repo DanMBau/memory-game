@@ -7,7 +7,7 @@ import pics from "./pics.json"
 
 
 class App extends Component {
-
+  // Setting this.state.friends to the friends json array
   state = {
     pics,
     correctGuesses: 0,
@@ -26,10 +26,12 @@ handleIncrement = (id) => {
 
     if (this.state.correctGuesses > this.state.bestScore) {
       this.setState({ bestScore: this.state.correctGuesses });
+    this.setState({correctGuesses: 0, heading: "You guessed incorrectly!" });
+
     }
     
   } else {
-    this.setState({correctGuesses: this.state.correctGuesses , heading: "You guessed incorrectly!" });
+    // this.setState({correctGuesses: 0, heading: "You guessed incorrectly!" });
     /* console.log(this.state.idsClicked); */
   }
   
@@ -39,11 +41,15 @@ handleIncrement = (id) => {
 
     //state pics array
     let pics = this.state.pics;
+    
+    
+
+      
       //update with random array
       
       this.handleIncrement()
       pics.sort(function(a, b){return 0.5 - Math.random()});
-      // this.setState({ pics });
+      this.setState({ pics });
       
     }
 
